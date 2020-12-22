@@ -34,8 +34,8 @@ describe('CalculatorOverviewComponent', () => {
 
   it('sould get calculatins on init', () => {
     const calculations: Calculation[] = [
-      { calculation: '1 + 1 = 2' }
-    ]
+      { calculation: '1 + 1 = 2' },
+    ];
     spyOn(calculationService, 'getCalculations').and.returnValue(of(calculations));
 
     component.ngOnInit();
@@ -47,10 +47,10 @@ describe('CalculatorOverviewComponent', () => {
   it('should subscribe to subject on init', () => {
     const calculations: Calculation[] = [
       { calculation: '1 + 1 = 2' }
-    ]
+    ];
     spyOn(calculationService, 'getCalculations').and.returnValue(of(calculations));
     let subscribed = false;
-    calculationService.calculationMade$ = { subscribe() { subscribed = true; } } as Subject<void>;
+    calculationService.calculationMade$ = { subscribe(): void { subscribed = true; } } as Subject<void>;
 
     component.ngOnInit();
 
@@ -60,7 +60,7 @@ describe('CalculatorOverviewComponent', () => {
   it('should getCalculations when subject is raised', () => {
     const calculations: Calculation[] = [
       { calculation: '1 + 1 = 2' }
-    ]
+    ];
     spyOn(calculationService, 'getCalculations').and.returnValue(of(calculations));
     calculationService.calculationMade$ = new Subject<void>();
 
@@ -70,4 +70,3 @@ describe('CalculatorOverviewComponent', () => {
     expect(calculationService.getCalculations).toHaveBeenCalledTimes(2);
   });
 });
-  

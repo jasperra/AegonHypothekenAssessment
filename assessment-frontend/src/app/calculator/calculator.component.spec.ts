@@ -31,75 +31,75 @@ describe('CalculatorComponent', () => {
   });
 
   it('should display 0 as default value for calculator', () => {
-    expect(component.calculation).toBe('0')
+    expect(component.calculation).toBe('0');
   });
 
   it('should display 1 when adding 1 to calculation', () => {
     component.addNumber(1);
-    expect(component.calculation).toBe('1')
+    expect(component.calculation).toBe('1');
   });
 
   it('should continue to add numbers', () => {
     component.addNumber(1);
     component.addNumber(0);
-    expect(component.calculation).toBe('10')
+    expect(component.calculation).toBe('10');
   });
 
   it('should not display display multiple zeros', () => {
     component.addNumber(0);
-    expect(component.calculation).toBe('0')
+    expect(component.calculation).toBe('0');
   });
 
   it('should display the ADD operator when added', () => {
     component.addOperator('ADD');
-    expect(component.calculation).toBe('0 + ')
+    expect(component.calculation).toBe('0 + ');
   });
 
   it('should display the SUBTRACT operator when added', () => {
     component.addOperator('SUBTRACT');
-    expect(component.calculation).toBe('0 - ')
+    expect(component.calculation).toBe('0 - ');
   });
 
   it('should display the MULTIPLY operator when added', () => {
     component.addOperator('MULTIPLY');
-    expect(component.calculation).toBe('0 X ')
+    expect(component.calculation).toBe('0 X ');
   });
 
   it('should display the DIVIDE operator when added', () => {
     component.addOperator('DIVIDE');
-    expect(component.calculation).toBe('0 / ')
+    expect(component.calculation).toBe('0 / ');
   });
 
   it('should not display two operators', () => {
     component.addOperator('ADD');
     component.addOperator('SUBTRACT');
-    expect(component.calculation).toBe('0 - ')
+    expect(component.calculation).toBe('0 - ');
   });
 
   it('should display numbers behind operator when added', () => {
     component.addOperator('ADD');
-    component.addNumber(1)
-    expect(component.calculation).toBe('0 + 1')
+    component.addNumber(1);
+    expect(component.calculation).toBe('0 + 1');
   });
 
   it('should display numbers no more than one leading zero', () => {
     component.addOperator('ADD');
-    component.addNumber(0)
-    component.addNumber(0)
-    expect(component.calculation).toBe('0 + 0')
+    component.addNumber(0);
+    component.addNumber(0);
+    expect(component.calculation).toBe('0 + 0');
   });
 
   it('should display the first zero when added', () => {
     component.addOperator('ADD');
-    component.addNumber(0)
-    expect(component.calculation).toBe('0 + 0')
+    component.addNumber(0);
+    expect(component.calculation).toBe('0 + 0');
   });
 
   it('should continue to add numbers with operator', () => {
     component.addOperator('ADD');
     component.addNumber(1);
     component.addNumber(0);
-    expect(component.calculation).toBe('0 + 10')
+    expect(component.calculation).toBe('0 + 10');
   });
 
   it('should be able to calculate 1 + 1', () => {
@@ -137,7 +137,7 @@ describe('CalculatorComponent', () => {
   it('should raise an event when calculation was successful', () => {
     spyOn(calculationService, 'calculate').and.returnValue(of(3));
     let eventRaised = false;
-    calculationService.calculationMade$ = { next() { eventRaised = true; } } as Subject<void>;
+    calculationService.calculationMade$ = { next(): void { eventRaised = true; } } as Subject<void>;
 
     component.addNumber(1);
     component.addOperator('ADD');
@@ -160,6 +160,6 @@ describe('CalculatorComponent', () => {
 
     component.addNumber(2);
 
-    expect(component.calculation).toBe('2')
-  })
+    expect(component.calculation).toBe('2');
+  });
 });

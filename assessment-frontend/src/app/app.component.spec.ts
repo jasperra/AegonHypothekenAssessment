@@ -14,7 +14,7 @@ describe('AppComponent', () => {
 
     fixture = TestBed.createComponent(AppComponent);
     appComponent = fixture.componentInstance;
-    
+
   });
 
   it('should create the app', () => {

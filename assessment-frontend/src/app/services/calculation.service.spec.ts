@@ -64,7 +64,7 @@ describe('CalculationService', () => {
   it('should get passt calculations', () => {
     const calculations: Calculation[] = [
       { calculation: '1 + 1 = 2' }
-    ]
+    ];
 
     service.getCalculations().subscribe(data => {
       expect(data).toBe(calculations);

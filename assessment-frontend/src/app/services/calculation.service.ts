@@ -18,7 +18,7 @@ export class CalculationService {
   }
 
   public calculate(value1: number, operator: Operator, value2: number): Observable<number> {
-    switch(operator) {
+    switch (operator) {
       case Operator.ADD:
         return this.add(value1, value2);
       case Operator.SUBTRACT:

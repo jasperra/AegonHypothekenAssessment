@@ -17,7 +17,7 @@ export class CalculatorOverviewComponent implements OnInit {
 
     this.calculationService.calculationMade$.subscribe(() => {
       this.getCalculations();
-    })
+    });
   }
 
   private getCalculations(): void {

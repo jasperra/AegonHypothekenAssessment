@@ -20,7 +20,7 @@ export class CalculatorComponent implements OnInit {
   }
 
   get calculation(): string {
-    return `${this.value1}${this.operator? ` ${this.operator} ` : ''}${this.value2}`;
+    return `${this.value1}${this.operator ? ` ${this.operator} ` : ''}${this.value2}`;
   }
 
   calculate(): void {
@@ -39,9 +39,9 @@ export class CalculatorComponent implements OnInit {
 
   addNumber(value: number): void {
     if (!this.operator) {
-      this.value1 = this.value1 === undefined || this.value1 === '0'? `${value}` : (this.value1 + value).replace(/^0+/, '');
+      this.value1 = this.value1 === undefined || this.value1 === '0' ? `${value}` : (this.value1 + value).replace(/^0+/, '');
     } else {
-      this.value2 = this.value2 === '' || this.value2 === '0'? `${value}` : (this.value2 + value).replace(/^0+/, '');
+      this.value2 = this.value2 === '' || this.value2 === '0' ? `${value}` : (this.value2 + value).replace(/^0+/, '');
     }
   }
 
