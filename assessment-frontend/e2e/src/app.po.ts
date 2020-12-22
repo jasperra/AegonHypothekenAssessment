@@ -5,7 +5,11 @@ export class AppPage {
     return browser.get(browser.baseUrl);
   }
 
-  async getTitleText(): Promise<string> {
-    return element(by.css('app-root .content span')).getText();
+  async getCalculationText(): Promise<String> {
+    return element(by.css('app-root app-calculator #calculation')).getText();
+  }
+
+  async getButton(id: string): Promise<HTMLElement> {
+    return element(by.css(`app-root app-calculator #button-${id}`));
   }
 }

@@ -1,32 +1,32 @@
 <table>
     <thead>
       <tr>
-        <th>{{calculation}}</th>
+        <th id="calculation">{{calculation}}</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td (click)="addNumber(7)">7</td>
-        <td (click)="addNumber(8)">8</td>
-        <td (click)="addNumber(9)">9</td>
-        <td (click)="addOperator('MULTIPLY')">X</td>
+        <td id="button-7" (click)="addNumber(7)">7</td>
+        <td id="button-8" (click)="addNumber(8)">8</td>
+        <td id="button-9" (click)="addNumber(9)">9</td>
+        <td id="button-multiply" (click)="addOperator('MULTIPLY')">X</td>
       </tr>
       <tr>
-        <td (click)="addNumber(4)">4</td>
-        <td (click)="addNumber(5)">5</td>
-        <td (click)="addNumber(6)">6</td>
-        <td (click)="addOperator('SUBTRACT')">-</td>
+        <td id="button-4" (click)="addNumber(4)">4</td>
+        <td id="button-5" (click)="addNumber(5)">5</td>
+        <td id="button-6" (click)="addNumber(6)">6</td>
+        <td id="button-subtract" (click)="addOperator('SUBTRACT')">-</td>
       </tr>
       <tr>
-        <td (click)="addNumber(1)">1</td>
-        <td (click)="addNumber(2)">2</td>
-        <td (click)="addNumber(3)">3</td>
-        <td (click)="addOperator('ADD')">+</td>
+        <td id="button-1" (click)="addNumber(1)">1</td>
+        <td id="button-2" (click)="addNumber(2)">2</td>
+        <td id="button-3" (click)="addNumber(3)">3</td>
+        <td id="button-add" (click)="addOperator('ADD')">+</td>
       </tr>
       <tr>
-        <td (click)="addNumber(0)">0</td>
-        <td (click)="calculate()">=</td>
-        <td (click)="addOperator('DIVIDE')">/</td>
+        <td id="button-0" (click)="addNumber(0)">0</td>
+        <td id="button-calc" (click)="calculate()">=</td>
+        <td id="button-divide" (click)="addOperator('DIVIDE')">/</td>
       </tr>
     </tbody>
   </table>
