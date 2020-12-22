@@ -11,5 +11,4 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CalculationResponse {
     private String calculation;
-    private double answer;
 }

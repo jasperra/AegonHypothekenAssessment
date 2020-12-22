@@ -1,0 +1,24 @@
+databaseChangeLog:
+  -  preConditions:
+  -  runningAs:
+       username:  root
+
+  -  changeSet:
+       id:  1
+       author:  jr
+       changes:
+         -  createTable:
+              tableName:  calculation
+              columns:
+                -  column:
+                     name:  id
+                     type:  int
+                     autoIncrement:  true
+                     constraints:
+                       primaryKey:  true
+                       nullable:  false
+                -  column:
+                     name:  calculation
+                     type:  varchar(50)
+                     constraints:
+                       nullable: false

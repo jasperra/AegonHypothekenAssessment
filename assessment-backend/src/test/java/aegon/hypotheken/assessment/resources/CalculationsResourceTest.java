@@ -32,7 +32,7 @@ public class CalculationsResourceTest {
 
     @Test
     public void getAll() {
-        Calculation calculation = Calculation.builder().calculation("1+1").answer(2).build();
+        Calculation calculation = Calculation.builder().calculation("1 + 1 = 2").build();
         when(calculationService.getAllCalculations()).thenReturn(Collections.singletonList(calculation));
 
         ResponseEntity<List<CalculationResponse>> result = calculationsResource.getAllCalculations();
@@ -43,8 +43,7 @@ public class CalculationsResourceTest {
         assertEquals(1, result.getBody().size());
 
         CalculationResponse calculationResponse = result.getBody().get(0);
-        assertEquals("1+1", calculationResponse.getCalculation());
-        assertEquals(2, calculationResponse.getAnswer(), 0);
+        assertEquals("1 + 1 = 2", calculationResponse.getCalculation());
     }
 
     @Test

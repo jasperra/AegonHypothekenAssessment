@@ -24,20 +24,19 @@ public class CalculationsResource {
     private final CalculationService calculationService;
 
     @Autowired
-    public CalculationsResource(CalculationService calculationService) {
+    public CalculationsResource(final CalculationService calculationService) {
         this.calculationService = calculationService;
     }
 
     @GetMapping
     public ResponseEntity<List<CalculationResponse>> getAllCalculations() {
-        log.info("Retrieving all calculations");
+        log.info("Receiving GET request for /calculations");
 
         return ResponseEntity.ok(
                 calculationService.getAllCalculations()
                         .stream()
                         .map(calculation -> new CalculationResponse(
-                                calculation.getCalculation(),
-                                calculation.getAnswer()
+                                calculation.getCalculation()
                         ))
                         .collect(Collectors.toList()));
     }
@@ -68,6 +67,8 @@ public class CalculationsResource {
         log.info("Calculating: dividing {} by {}", input1, input2);
 
         if (input2 == 0) {
+            log.error("Can't divide by 0: {} - {}", input1, input2);
+
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Can't divide by 0");
         }
 
