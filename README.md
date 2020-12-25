@@ -11,4 +11,4 @@ The front-end will be running at http://localhost:4200/
 
 The unit and integration test for the backend are automaticly executed when you run ```mvn install```.  
 The front-end unit test can be run by running ```npm test```.  
-To run the e2e test for the front-end runt ```npm e2e```  
+To run the e2e test for the front-end runt ```ng e2e```  
