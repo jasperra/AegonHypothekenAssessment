@@ -1,6 +1,6 @@
 export enum Operator {
-    ADD = '+',
-    SUBTRACT = '-',
-    MULTIPLY = 'X',
-    DIVIDE = '/'
+    ADD = 'ADD',
+    SUBTRACT = 'SUBTRACT',
+    MULTIPLY = 'MULTIPLY',
+    DIVIDE = 'DIVIDE'
 }

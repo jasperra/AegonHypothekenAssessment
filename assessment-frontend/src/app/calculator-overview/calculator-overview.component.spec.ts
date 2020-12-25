@@ -1,7 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, Subject } from 'rxjs';
-import { Calculation } from '../models/calculation';
+import { CalculationResult } from '../models/calculation-result';
 import { CalculationService } from '../services/calculation.service';
 
 import { CalculatorOverviewComponent } from './calculator-overview.component';
@@ -32,8 +32,8 @@ describe('CalculatorOverviewComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('sould get calculatins on init', () => {
-    const calculations: Calculation[] = [
+  it('should get calculatins on init', () => {
+    const calculations: CalculationResult[] = [
       { calculation: '1 + 1 = 2' },
     ];
     spyOn(calculationService, 'getCalculations').and.returnValue(of(calculations));
@@ -45,7 +45,7 @@ describe('CalculatorOverviewComponent', () => {
   });
 
   it('should subscribe to subject on init', () => {
-    const calculations: Calculation[] = [
+    const calculations: CalculationResult[] = [
       { calculation: '1 + 1 = 2' }
     ];
     spyOn(calculationService, 'getCalculations').and.returnValue(of(calculations));
@@ -58,7 +58,7 @@ describe('CalculatorOverviewComponent', () => {
   });
 
   it('should getCalculations when subject is raised', () => {
-    const calculations: Calculation[] = [
+    const calculations: CalculationResult[] = [
       { calculation: '1 + 1 = 2' }
     ];
     spyOn(calculationService, 'getCalculations').and.returnValue(of(calculations));

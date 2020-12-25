@@ -1,6 +1,7 @@
 package aegon.hypotheken.assessment.service;
 
 import aegon.hypotheken.assessment.model.Calculation;
+import aegon.hypotheken.assessment.model.Operator;
 import aegon.hypotheken.assessment.repository.Calculationrepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,36 +22,29 @@ public class CalculationService {
         this.calculationrepository = calculationrepository;
     }
 
-    public double add(final int i1, final int i2) {
-        final double result = i1 + i2;
-
-        storeCalculation(String.format("%s + %s = %s", i1, i2, result));
-
-        return result;
+    private double add(final double i1, final double i2) {
+        return i1 + i2;
     }
 
-    public double subtract(final int i1, final int i2) {
-        final double result = i1 - i2;
-
-        storeCalculation(String.format("%s - %s = %s", i1, i2, result));
-
-        return result;
+    private double subtract(final double i1, final double i2) {
+        return i1 - i2;
     }
 
-    public double multiply(final int i1, final int i2) {
-        final double result = i1 * i2;
-
-        storeCalculation(String.format("%s * %s = %s", i1, i2, result));
-
-        return result;
+    private double multiply(final double i1, final double i2) {
+        return i1 * i2;
     }
 
-    public double divide(final int i1, final int i2) {
-        final double result = i1 / i2;
+    private double divide(final double i1, final double i2) {
+        return i1 / i2;
+    }
 
-        storeCalculation(String.format("%s / %s = %s", i1, i2, result));
-
-        return result;
+    public double calculate(final double i1, final Operator operator, final double i2) {
+        return switch (operator) {
+            case ADD -> add(i1, i2);
+            case SUBTRACT -> subtract(i1, i2);
+            case MULTIPLY -> multiply(i1, i2);
+            case DIVIDE -> divide(i1, i2);
+        };
     }
 
     public List<Calculation> getAllCalculations() {
@@ -61,7 +55,7 @@ public class CalculationService {
                 .collect(Collectors.toList());
     }
 
-    private void storeCalculation(final String calculation) {
+    public void storeCalculation(final String calculation) {
         log.info("Storing new calculation: {}", calculation);
 
         calculationrepository.save(Calculation.builder().calculation(calculation).build());

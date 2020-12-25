@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Calculation } from '../models/calculation';
+import { CalculationResult } from '../models/calculation-result';
 import { CalculationService } from '../services/calculation.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { CalculationService } from '../services/calculation.service';
   styleUrls: ['./calculator-overview.component.css']
 })
 export class CalculatorOverviewComponent implements OnInit {
-  calculations: Calculation[];
+  calculations: CalculationResult[];
 
   constructor(private calculationService: CalculationService) { }
 

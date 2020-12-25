@@ -1,3 +1,6 @@
+import { Operation } from "./operation";
+
 export class Calculation {
-    calculation: string;
+    startingNumber: string;
+    operations: Operation[];
 }

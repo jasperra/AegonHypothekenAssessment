@@ -102,6 +102,27 @@ describe('CalculatorComponent', () => {
     expect(component.calculation).toBe('0 + 10');
   });
 
+  it('should continue to add operators after adding numbers', () => {
+    component.addOperator('ADD');
+    component.addNumber(1);
+    component.addOperator('ADD');
+    expect(component.calculation).toBe('0 + 1 + ');
+  });
+
+  it('should handle multiple operations at once', () => {
+    component.addOperator('ADD');
+    component.addNumber(1);
+    component.addOperator('DIVIDE');
+    component.addNumber(1);
+    expect(component.calculation).toBe('0 + 1 / 1');
+  });
+
+  it('should send operators back with names not symbols', () => {
+    component.addOperator('ADD');
+    
+    expect(component._calculation.operations[0].operator).toBe('ADD');
+  })
+
   it('should be able to calculate 1 + 1', () => {
     spyOn(calculationService, 'calculate').and.returnValue(of(3));
 
@@ -152,11 +173,11 @@ describe('CalculatorComponent', () => {
 
     component.calculate();
 
-    expect(component.calculation).toBe('undefined');
+    expect(component.calculation).toBe('NAN');
   });
 
   it('should be able to add a number after failure to calculate', () => {
-    component.value1 = undefined;
+    component._calculation.startingNumber = 'NAN';
 
     component.addNumber(2);
 

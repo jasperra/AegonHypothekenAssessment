@@ -54,6 +54,18 @@ describe('workspace-project App', () => {
     expect(await page.getCalculationText()).toEqual('3');
   });
 
+  it('should be able to handle complex calculations', async () => {
+    (await page.getButton('add')).click();
+    (await page.getButton('3')).click();
+    (await page.getButton('multiply')).click();
+    (await page.getButton('3')).click();
+    (await page.getButton('calc')).click();
+
+    await browser.sleep(1000);
+
+    expect(await page.getCalculationText()).toEqual('18');
+  });
+
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);

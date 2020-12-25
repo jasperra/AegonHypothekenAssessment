@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Calculation } from '../models/calculation';
+import { Operation } from '../models/operation';
 import { Operator } from '../models/operator';
 import { CalculationService } from '../services/calculation.service';
+import { convertToSymbol } from '../util/operator.util';
 
 @Component({
   selector: 'app-calculator',
@@ -8,44 +11,67 @@ import { CalculationService } from '../services/calculation.service';
   styleUrls: ['./calculator.component.css']
 })
 export class CalculatorComponent implements OnInit {
-  value1: string;
-  value2: string;
-  operator: Operator;
+  _calculation: Calculation;
 
   constructor(private calculationService: CalculationService) {}
 
   ngOnInit(): void {
-    this.value1 = '0';
-    this.value2 = '';
+    this._calculation = {
+      startingNumber: '0',
+      operations: []
+    };
   }
 
   get calculation(): string {
-    return `${this.value1}${this.operator ? ` ${this.operator} ` : ''}${this.value2}`;
+    const operations = this._calculation.operations.map((operation) => ` ${convertToSymbol(operation.operator)} ${operation.value}`).join('');
+    return `${this._calculation.startingNumber}${operations}`
   }
 
   calculate(): void {
-    this.calculationService.calculate(+this.value1, this.operator, +this.value2).subscribe(data => {
-      this.value1 = `${data}`;
-      this.operator = undefined;
-      this.value2 = '';
-
+    this.calculationService.calculate(this._calculation).subscribe(data => {
+      if (!data || `${data}` === 'Infinity') {
+        this._calculation = {
+          startingNumber: `NAN`,
+          operations: []
+        }
+      }
+      this._calculation = {
+        startingNumber: `${data}`,
+        operations: []
+      }
       this.calculationService.calculationMade$.next();
     }, () => {
-      this.value1 = undefined;
-      this.operator = undefined;
-      this.value2 = '';
+      this._calculation = {
+        startingNumber: `NAN`,
+        operations: []
+      }
     });
   }
 
   addNumber(value: number): void {
-    if (!this.operator) {
-      this.value1 = this.value1 === undefined || this.value1 === '0' ? `${value}` : (this.value1 + value).replace(/^0+/, '');
+    const lastEntry = this.getLastOperationEntry();
+
+    if(!lastEntry) {
+      this._calculation.startingNumber = this._calculation.startingNumber === 'NAN' || this._calculation.startingNumber === '0' ? `${value}` : (this._calculation.startingNumber + value).replace(/^0+/, '');
     } else {
-      this.value2 = this.value2 === '' || this.value2 === '0' ? `${value}` : (this.value2 + value).replace(/^0+/, '');
+      lastEntry.value = lastEntry.value === '' || lastEntry.value === '0' ? `${value}` : (lastEntry.value + value).replace(/^0+/, '');
     }
   }
 
   addOperator(operator: string): void {
-    this.operator = Operator[operator];
+    const lastEntry = this.getLastOperationEntry();
+
+    if (!lastEntry || lastEntry.value !== '') {
+      this._calculation.operations.push({
+        operator: Operator[operator],
+        value: ''
+      });
+    } else {
+      lastEntry.operator = Operator[operator];
+    }
+  }
+
+  private getLastOperationEntry(): Operation {
+    return this._calculation.operations[this._calculation.operations.length - 1];
   }
 }
